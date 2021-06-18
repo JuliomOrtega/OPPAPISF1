@@ -9,10 +9,9 @@ Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://j
 Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para posteriormente retirar fondos.
 
 ```java
-**Crear una cuenta bancaria**
-
-## Crea y asigna una cuenta bancaria al cliente espeficado.
-
+//======================================================================================================
+// Crea y asigna una cuenta bancaria al cliente espeficado.
+//======================================================================================================
 OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx', '{Llave Privada}', '{MERCHANT_ID}');
 BankAccount request = new BankAccount();
 request.Clabe('032180000118359719');
@@ -22,9 +21,6 @@ request.HolderName('Juan Hernández Sánchez');
 request = api.bankAccounts().create('aqiyel6y0zfvpa6eptav',request);
 system.debug('>>>request'+ request);
 
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
 ```
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
