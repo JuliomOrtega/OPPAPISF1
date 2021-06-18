@@ -12,7 +12,8 @@ Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para
 //======================================================================================================
 // Crea y asigna una cuenta bancaria al cliente espeficado.
 //======================================================================================================
-OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx', '{Llave Privada}', '{MERCHANT_ID}');
+OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx',
+'{Llave Privada}', '{MERCHANT_ID}');
 BankAccount request = new BankAccount();
 request.Clabe('032180000118359719');
 request.Alias('Cuenta principal');
