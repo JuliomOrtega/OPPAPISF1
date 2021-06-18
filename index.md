@@ -8,7 +8,7 @@ Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para
 
 
 #### Crear Cuenta Bancaria
-###### BankAccount Objeto Cuenta Bancaria
+**BankAccount Objeto Cuenta Bancaria**
 
 #### Petición
 
@@ -19,9 +19,9 @@ alias |	**string** (opcional, longitud = 45)
 clabe |**string** (requerido, longitud = 45)
 
 ```java
-//======================================================================================================
+//==================================================================
 // Crea y asigna una cuenta bancaria al cliente espeficado.
-//======================================================================================================
+//==================================================================
 OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx',
 '{Llave Privada}', '{MERCHANT_ID}');
 
@@ -35,7 +35,7 @@ system.debug('>>>request'+ request);
 
 ```
 
-##### Respuesta 
+**Respuesta** 
 Regresa un objeto cuenta bancaria
 
 
@@ -62,7 +62,7 @@ request = api.bankAccounts().get('aqiyel6y0zfvpa6eptav',
                                 'bzyrdyyrbzkkb9aehh5d');
 system.debug('>>>request'+ request);
 ```
-##### Respuesta 
+**Respuesta** 
 Regresa un objeto cuenta bancaria
 
 #### ELimina una cuenta bancaria
@@ -91,7 +91,7 @@ request = api.bankAccounts().remove('aqiyel6y0zfvpa6eptav',request);
 system.debug('>>>request'+ request);
 
 ```
-##### Respuesta 
+**Respuesta** 
 Si la cuenta bancaria se borra correctamente la respuesta es vacía,
  si no se puede borrar se regresa un objeto error indicando el motivo.
 
@@ -119,8 +119,15 @@ api.bankAccounts().getList('ato3eklzedfccxho1yiz',searchparams.limitSize (2));
 system.debug('>>>ListbankAccount'+ ListbankAccount);
 
 ```
-##### Respuesta 
+**Respuesta** 
 Listado de objetos cuenta bancaria
+
+# The first section
+
+\newpage
+
+# The second section
+
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
