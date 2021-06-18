@@ -1,0 +1,195 @@
+<!doctype html>
+<html>
+
+
+<head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+    <!-- Use title if it's in the page YAML frontmatter -->
+    <title>API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+    <script src="../../code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="javascripts/all.js"></script>
+
+    <script>
+        $(function() {
+            var toc = $("#toc").tocify({
+                selectors: "h1,h2",
+                extendPage: false,
+                theme: "none",
+                smoothScroll: false,
+                showEffectSpeed: 0,
+                hideEffectSpeed: 180,
+                ignoreSelector: ".toc-ignore",
+                hashGenerator: 'pretty',
+                highlightOffset: 60,
+                scrollTo: -2,
+                scrollHistory: true,
+                hashGenerator: function(text, element) {
+                    return element[0].getAttribute('id');
+                }
+            }).data("toc-tocify");
+            // Hack to make already open sections to start opened,
+            // instead of displaying an ugly animation
+            setTimeout(function() {
+                toc.setOption("showEffectSpeed", 180);
+            }, 50);
+            setupLanguages([
+                'APEX'
+            ]);
+        });
+    </script>
+</head>
+
+<body class="index">
+    <div class="tocify-wrapper">
+        <img src="../img/logo.png" />
+        <div class="search">
+            <input type="text" class="search" id="input-search" placeholder="Búsqueda">
+        </div>
+        <ul class="search-results"></ul>
+        <div id="toc">
+        </div>
+        <ul class="toc-footer">
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+        <div class="content">
+            <h1 id="introducci-n">Introducción</h1>
+
+            <p>La API de Openpay está diseña sobre <a href="http://es.wikipedia.org/wiki/Representational_State_Transfer">REST</a>, por lo tanto encontrarás que las URL están orientadas a recursos y se usa códigos de respuesta HTTP para indicar los errores
+                en la API.</p>
+
+            <p>Todas las respuestas de la API están en formato <a href="http://www.json.org/">JSON</a>, incluyendo errores.</p>
+
+            <p>En el caso de usar los clientes existentes del API de Openpay (<a href="https://github.com/open-pay/openpay-java">Java</a>, <a href="https://github.com/open-pay/openpay-php">Php</a>, <a href="https://github.com/open-pay/openpay-dotnet">C#</a>,
+                <a href="https://github.com/open-pay/openpay-python">Python</a>, <a href="https://github.com/open-pay/openpay-ruby">Ruby</a>, <a href="https://github.com/open-pay/openpay-node">NodeJS</a>), las respuestas son específicamente del tipo definido
+                en dichos clientes en sus respectivos lenguajes.</p>
+
+            <h1 id="api-endpoints">API Endpoints</h1>
+
+            <blockquote>
+                <p>Recurso disponibles</p>
+            </blockquote>
+
+            <p><br/>
+                <br/></p>
+
+            <blockquote>
+                <p>a) Por Comercio</p>
+            </blockquote>
+            <pre class="highlight plaintext"><code>
+                /v1/{MERCHANT_ID}/...
+
+/fees
+/fees/{FEE_ID}
+/charges
+/charges/{TRANSACTION_ID}
+/payouts
+/payouts/{TRANSACTION_ID}
+/cards
+/cards/{CARD_ID}
+/customers
+/customers/{CUSTOMER_ID}
+/plans
+/plans/{PLAN_ID}
+​/tokens
+/tokens/{TOKEN_ID}
+</code></pre>
+
+            <blockquote>
+                <p>b) Por Cliente</p>
+            </blockquote>
+            <pre class="highlight plaintext"><code>/v1/{MERCHANT_ID}/customers/{CUSTOMER_ID}/...
+
+/cards
+/cards/{CARD_ID}
+/bankaccounts
+/bankaccounts/{BANKACCOUNT_ID}
+/charges
+/charges/{TRANSACTION_ID}
+/payouts
+/payouts/{TRANSACTION_ID}
+/transfers
+/transfers/{TRANSACTION_ID}
+/subscriptions
+/subscriptions/{SUBSCRIPTION_ID}
+</code></pre>
+
+            <p>La API REST de Openpay tiene un ambiente de pruebas (sandbox) y un ambiente de producción. Usa las credenciales que se generaron al momento de tu registro para realizar la integración de tu sistema con Openpay. Una vez que estes listo para
+                pasar a producción y tu solicitud sea aprobada, se generarán nuevas credenciales para acceder al ambiente de producción.</p>
+
+            <p>La siguientes URIs forman la base de los endpoints para los ambientes soportados:</p>
+
+            <ul>
+                <li><strong>Pruebas</strong>, URI base: <br/> <code class="prettyprint">https://sandbox-api.openpay.mx</code><br/><br/></li>
+                <li><strong>Producción</strong>, URI base: <br/><code class="prettyprint">https://api.openpay.mx</code><br/></li>
+            </ul>
+
+            <p>Un endpoint completo esta formado por la URI base del ambiente, el identificador del comercio y el recurso. </p>
+
+            <p>Por ejemplo, si queremos crear un nuevo cliente, el endpoint sería:</p>
+
+            <p><code>POST https://sandbox-api.openpay.mx/v1/mzdtln0bmtms6o3kck8f/customers</code></p>
+
+            <p>Para crear una petición completa es necesaria envíar las cabeceras HTTP correctas y la información en formato JSON.</p>
+
+            <aside class="notice">
+                Todos los ejemplos de está documentación están apuntados al ambiente de pruebas.
+            </aside>
+
+            <h1 id="autenticaci-n">Cuentas Bancarias</h1>
+
+            <blockquote>
+                <p>Ejemplo de autenticación</p>
+            </blockquote>
+           
+            
+            <pre class="highlight plaintext"><code>
+OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx'
+, 'sk_ea0ff2f43c404dc89b4c72fa7687ca4e', 'm8ms4ku4me6d1tze4uf5');
+
+BankAccount request = new BankAccount();
+request.Clabe('032180000118359719');
+request.Alias('Cuenta principal');
+request.HolderName('Juan Hernández Sánchez');
+
+
+request = api.bankAccounts().create('aqiyel6y0zfvpa6eptav',request);
+system.debug('>>>request'+ request);    
+
+            </code></pre>
+
+        </div>
+        <div class="dark-box">
+            <div id="lang-selector">
+                <a href="#" data-language-name="java">APEX Code - Salesforce</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', '../../www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-46051555-1', 'openpay.mx');
+        ga('send', 'pageview');
+    </script>
+</body>
+
+
+<!-- Mirrored from www.openpay.mx/api/?java by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 17 Jun 2021 18:11:04 GMT -->
+</html>
