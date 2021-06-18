@@ -1,25 +1,29 @@
-## Welcome to GitHub Pages
+## Salesforce API Open pay
 
 You can use the [editor on GitHub](https://github.com/JuliomOrtega/OPPAPISF1/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
 Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
 
-### Markdown
+### Cuentas Bancarias
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para posteriormente retirar fondos.
 
 ```markdown
-Syntax highlighted code block
+**Crear una cuenta bancaria**
 
-# Header 1
-## Header 2
-### Header 3
+## Crea y asigna una cuenta bancaria al cliente espeficado.
 
-- Bulleted
-- List
+OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx'
+		, 'sk_ea0ff2f43c404dc89b4c72fa7687ca4e', 'm8ms4ku4me6d1tze4uf5');
 
-1. Numbered
-2. List
+BankAccount request = new BankAccount();
+request.Clabe('032180000118359719');
+request.Alias('Cuenta principal');
+request.HolderName('Juan Hernández Sánchez');
+
+
+request = api.bankAccounts().create('aqiyel6y0zfvpa6eptav',request);
+system.debug('>>>request'+ request);
 
 **Bold** and _Italic_ and `Code` text
 
