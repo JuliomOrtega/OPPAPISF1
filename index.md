@@ -1,12 +1,22 @@
 ## Salesforce API Open pay
 
-You can use the [editor on GitHub](https://github.com/JuliomOrtega/OPPAPISF1/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
-
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Documentación Salesforce uso de API 
 
 ### Cuentas Bancarias
 
 Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para posteriormente retirar fondos.
+
+
+### BankAccount  
+Objeto Cuenta Bancaria
+
+### Petición
+
+Propiedad | Descripción
+------------ | -------------
+holder_name |	**string** (requerido, longitud = 80)
+alias |	**string** (opcional, longitud = 45) 
+clabe |**string** (requerido, longitud = 45)
 
 ```java
 //======================================================================================================
@@ -14,6 +24,7 @@ Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para
 //======================================================================================================
 OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx',
 '{Llave Privada}', '{MERCHANT_ID}');
+
 BankAccount request = new BankAccount();
 request.Clabe('032180000118359719');
 request.Alias('Cuenta principal');
