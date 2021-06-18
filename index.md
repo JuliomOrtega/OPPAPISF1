@@ -7,10 +7,10 @@ Documentación Salesforce uso de API
 Se pueden almacenar múltiples cuentas bancarias por cliente o por comercio para posteriormente retirar fondos.
 
 
-### BankAccount  
-Objeto Cuenta Bancaria
+#### Crear Cuenta Bancaria
+###### BankAccount Objeto Cuenta Bancaria
 
-### Petición
+#### Petición
 
 Propiedad | Descripción
 ------------ | -------------
@@ -34,6 +34,93 @@ request = api.bankAccounts().create('aqiyel6y0zfvpa6eptav',request);
 system.debug('>>>request'+ request);
 
 ```
+
+##### Respuesta 
+Regresa un objeto cuenta bancaria
+
+
+#### Obtener una cuenta bancaria
+Obtiene los detalles de una cuenta bancaria asignada a un cliente
+
+#### Petición
+
+Propiedad | Descripción
+------------ | -------------
+id |	**string** (requerido, longitud = 45)
+
+
+```java
+//==================================================================
+// obtiene cuenta bancaria al cliente espeficado.
+//==================================================================
+OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx',
+'{Llave Privada}', '{MERCHANT_ID}');
+
+//(ID Customer , BankAccount ID )
+BankAccount request = new BankAccount();
+request = api.bankAccounts().get('aqiyel6y0zfvpa6eptav',
+                                'bzyrdyyrbzkkb9aehh5d');
+system.debug('>>>request'+ request);
+```
+##### Respuesta 
+Regresa un objeto cuenta bancaria
+
+#### ELimina una cuenta bancaria
+Obtiene los detalles de una cuenta bancaria asignada a un cliente
+
+#### Petición
+
+Propiedad | Descripción
+------------ | -------------
+id |	**string** (requerido, longitud = 45)
+
+
+```java
+//==================================================================
+// Elimina cuenta bancaria al cliente espeficado.
+//==================================================================
+OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx',
+'{Llave Privada}', '{MERCHANT_ID}');
+
+BankAccount request = new BankAccount();
+request.Clabe('032180000118359719');
+request.Alias('Cuenta principal');
+request.HolderName('Juan Hernández Sánchez');
+
+request = api.bankAccounts().remove('aqiyel6y0zfvpa6eptav',request);
+system.debug('>>>request'+ request);
+
+```
+##### Respuesta 
+Si la cuenta bancaria se borra correctamente la respuesta es vacía,
+ si no se puede borrar se regresa un objeto error indicando el motivo.
+
+
+#### ELimina una cuenta bancaria
+Obtiene los detalles de una cuenta bancaria asignada a un cliente
+
+#### Petición
+
+Propiedad | Descripción
+------------ | -------------
+id |	**string** (requerido, longitud = 45)
+
+
+```java
+//==================================================================
+// listado de cuenta bancarias.
+//==================================================================
+OpenpayAPI api = new OpenpayAPI('https://sandbox-api.openpay.mx',
+'{Llave Privada}', '{MERCHANT_ID}');
+
+SearchParams searchparams = new SearchParams ();
+List<BankAccount> ListbankAccount  = 
+api.bankAccounts().getList('ato3eklzedfccxho1yiz',searchparams.limitSize (2));
+system.debug('>>>ListbankAccount'+ ListbankAccount);
+
+```
+##### Respuesta 
+Listado de objetos cuenta bancaria
 
 For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
